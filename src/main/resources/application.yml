@@ -1,0 +1,26 @@
+spring:
+  resources:
+    static-locations: classpath:/static/
+  jpa:
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/xingweb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=America/New_York
+    username: root
+    password: root
+  freemarker:
+    template-loader-path: ["classpath:/templates", "classpath:/tags"]
+    request-context-attribute: request
+    settings:
+     tag_syntax: auto_detect
+     default_encoding: UTF-8
+     output_encoding: UTF-8
+     locale: zh_CN
+     date_format: yyyy-MM-dd
+     time_format: HH:mm:ss
+     number_format: 0
+     datetime_format: yyyy-MM-dd HH:mm:ss
+     classic_compatible: true
+     template_exception_handler: html_debug
+     auto_import: layout/common.ftl as common,layout/admin.ftl as admin
+
