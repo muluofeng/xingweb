@@ -4,11 +4,16 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="assets/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img
+                    [#if Session.admin_user.avatar]
+                            src="${Session.admin_user.avatar}"
+                    [#else]
+                            src="assets/adminLTE/dist/img/user2-160x160.jpg"
+                    [/#if] class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p>${Session.admin_user.username}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>
         </div>
         <!-- search form -->

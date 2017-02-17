@@ -12,10 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,32 +57,52 @@ public class AdminController {
         map.put("recordsTotal", adminPage.getTotalPages()); //数据库里总共记录数
         map.put("recordsFiltered",adminPage.getTotalElements());//返回的是过滤后的记录数
         map.put("data", adminPage.getContent());
+
+        map.put("title","管理员列表");
         return map;
     }
 
-    @RequestMapping("/add")
-    public String add(){
-        return "admin/user/item";
-    }
+
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String save(Admin admin,String confirmpassword){
-        admin.setSuper(false);
+    public String save(Admin admin,String confirmpassword,Model model){
+        if(admin.getId()!=null){  //编辑
+            model.addAttribute("title","编辑管理员");
+        }else{  //保存
+            model.addAttribute("title","添加管理员");
+        }
+        if("".equals(admin.getPassword())&&admin.getId()!=null){
+            admin.setPassword(null);
+        }else{
+            //验证密码
+            if(!admin.getPassword().equals(confirmpassword)){
+                model.addAttribute("message","2次密码不一致");
+                return "admin/user/item";
+            }
+            String salt= RandomStringUtils.randomAlphanumeric(20);
+            Md5PasswordEncoder encoder=new Md5PasswordEncoder();
+            String password=encoder.encodePassword(admin.getPassword(),salt);
+            admin.setSalt(salt);
+            admin.setPassword(password);
+        }
 
-        String salt= RandomStringUtils.randomAlphanumeric(20);
-        Md5PasswordEncoder encoder=new Md5PasswordEncoder();
-        String password=encoder.encodePassword(admin.getPassword(),salt);
-        admin.setSalt(salt);
-        admin.setPassword(password);
         admin.setStatus(0);
         admin.setSuper(false);
         adminService.save(admin);
         return "redirect:/admin/user";
     }
+    @RequestMapping("/add")
+    public String add(Model model)
+    {
+        model.addAttribute("title","添加管理员");
+        return "admin/user/item";
+    }
 
-
-    @RequestMapping("/item")
-    public String getItem(){
+    @RequestMapping("/edit/{id}")
+    public String getItem(@PathVariable()Integer id, Model model){
+        Admin admin=adminService.findById(id);
+        model.addAttribute("adminObj",admin);
+        model.addAttribute("title","编辑管理员");
         return "admin/user/item";
     }
 

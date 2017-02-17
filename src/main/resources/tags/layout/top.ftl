@@ -215,8 +215,13 @@
                 <li class="dropdown user user-menu">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/adminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">${Session.admin_user.nickname}</span>
+                        <img
+                                [#if Session.admin_user.avatar]
+                                        src="${Session.admin_user.avatar}21"
+                                [#else]
+                                        src="assets/adminLTE/dist/img/user2-160x160.jpg"
+                                [/#if] class="user-image" alt="User Image">
+                        <span class="hidden-xs">${Session.admin_user.username}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->

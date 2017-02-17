@@ -11,7 +11,7 @@ import java.util.Collection;
 public class AdminUser extends User {
     private String nickname;
     private String salt;
-
+    private String avatar;
     public AdminUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
@@ -34,5 +34,13 @@ public class AdminUser extends User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

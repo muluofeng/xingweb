@@ -23,6 +23,8 @@ public class AdminService {
         return adminDAO.findByLoginname(loginname);
     }
 
+    public Admin findById(Integer id){return adminDAO.findOne(id);}
+
     public Page<Admin> findAll(Pageable pageable){
         return adminDAO.findAll(pageable);
     }

@@ -32,7 +32,7 @@
                 "targets": [5],
                 "data": null,
                 "render":function(data,type,row,mata){
-                    return "<a href='javascript:void(0)' class='deleteById'  data-id="+data.id+">删除</a>";
+                    return "<a href='javascript:void(0)' class='deleteById'  data-id="+data.id+">删除|</a>"+""+"<a href='/admin/user/edit/"+data.id+"'>编辑</a>";
                 }
             }]
         });
@@ -71,12 +71,12 @@
     });
 </script>
 [/#assign]
-[@admin.layout title="后台首页"  scripts=scripts styles=styles]
+[@admin.layout title="管理员列表"  scripts=scripts styles=styles]
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">管理员列表</h3>
+                <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
