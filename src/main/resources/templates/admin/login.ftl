@@ -21,16 +21,24 @@
     <!--[if lt IE 9]>
 
     <![endif]-->
-
+    <style>
+        .login-page {
+            background-image: url('assets/img/login-background.png');
+            background-size: cover;
+        }
+        .login-box-body {
+            border-radius: 12px;
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b></b>后台登录</a>
+        <a href="../../index2.html"><img src="assets/img/xing-2.png" style="height:60px;width:50px"><b></b>xing</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg text-red">请输入用户名和密码</p>
 
         <form action="/admin/dologin" method="post"  id="loginForm">
             <div class="form-group has-feedback">
@@ -93,7 +101,8 @@
                     if(re.status==1){
                         location.href="/admin/user";
                     }else{
-                        //...
+                        //登录失败
+                        $("p.login-box-msg").text("用户名或者密码错误");
                     }
                 }
             })
