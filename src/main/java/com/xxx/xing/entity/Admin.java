@@ -1,5 +1,8 @@
 package com.xxx.xing.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +19,8 @@ public class Admin implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer  id;
 
+    @NotEmpty(message = "登录名不能为空")
+    @Length(min = 4,max = 10,message = "登录名必须4-10个字符")
     private String loginname;
 
     private String nickname;

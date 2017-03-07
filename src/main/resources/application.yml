@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   resources:
     static-locations: classpath:/static/
@@ -23,4 +25,7 @@ spring:
      classic_compatible: true
      template_exception_handler: html_debug
      auto_import: layout/common.ftl as common,layout/admin.ftl as admin
+image:
+  upload-dir: /Users/xing/workspaces/php/image/upload
+  domain-name: http://image.dev/
 

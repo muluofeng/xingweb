@@ -46,7 +46,7 @@
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码" name="password">
+                <input type="text" class="form-control" placeholder="密码" name="password" id="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -99,7 +99,7 @@
                 dataType:"json",
                 success:function(re){
                     if(re.status==1){
-                        location.href="/admin/user";
+                        location.href="/admin/index";
                     }else{
                         //登录失败
                         $("p.login-box-msg").text("用户名或者密码错误");
@@ -107,7 +107,9 @@
                 }
             })
         });
-
+        $("#password").on('focus',function () {
+            $(this).attr("type","password");
+        });
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',

@@ -12,12 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import javax.validation.Valid;
+import java.util.*;
 
 /**
  * Created by xing on 2017/2/15.
@@ -65,18 +64,38 @@ public class AdminController {
 
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String save(Admin admin,String confirmpassword,Model model){
+    public String save(@Valid Admin admin, BindingResult  bindingResult, String confirmpassword, Model model){
+        String  message=null;
         if(admin.getId()!=null){  //编辑
             model.addAttribute("title","编辑管理员");
-        }else{  //保存
+        }else{  //添加
+            admin.setCtime(new Date());
             model.addAttribute("title","添加管理员");
         }
+        //数据验证
+        if(bindingResult.hasErrors()){
+            message=bindingResult.getFieldError().getDefaultMessage();
+            model.addAttribute("adminObj",admin);
+            model.addAttribute("message",message);
+            return "admin/user/item";
+        }
+
         if("".equals(admin.getPassword())&&admin.getId()!=null){
             admin.setPassword(null);
         }else{
             //验证密码
+            boolean  isError=false;
             if(!admin.getPassword().equals(confirmpassword)){
-                model.addAttribute("message","2次密码不一致");
+                isError=true;
+                message="2次密码不一致";
+            }
+            if(admin.getPassword().length()>11||admin.getPassword().length()<6){
+                isError=true;
+                message="密码必须6-11个字符";
+            }
+            if(isError){
+                model.addAttribute("adminObj",admin);
+                model.addAttribute("message", message);
                 return "admin/user/item";
             }
             String salt= RandomStringUtils.randomAlphanumeric(20);
@@ -85,8 +104,7 @@ public class AdminController {
             admin.setSalt(salt);
             admin.setPassword(password);
         }
-
-        admin.setStatus(0);
+        admin.setStatus(1);
         admin.setSuper(false);
         adminService.save(admin);
         return "redirect:/admin/user";

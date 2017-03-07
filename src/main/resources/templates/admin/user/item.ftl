@@ -47,7 +47,7 @@
 //    });
 </script>
 [/#assign]
-[@admin.layout  title=title styles=styles  scripts=scripts ]
+[@admin.layout  title=title menu="admin/user/add" styles=styles  scripts=scripts ]
 <div class="col-md-12">
     <!-- Horizontal Form -->
     <div class="box box-info">
@@ -78,7 +78,7 @@
                     <label for="inputPassword3" class="col-sm-2 control-label">昵称</label>
 
                     <div class="col-sm-4">
-                        <input type="text" name="nickname" id="nickname" class="form-control" id="inputPassword3" placeholder="昵称" value="${adminObj.loginname}">
+                        <input type="text" name="nickname" id="nickname" class="form-control" id="inputPassword3" placeholder="昵称" value="${adminObj.nickname}">
                     </div>
                 </div>
                 <div class="form-group">

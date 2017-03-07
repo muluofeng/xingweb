@@ -71,7 +71,7 @@
     });
 </script>
 [/#assign]
-[@admin.layout title="管理员列表"  scripts=scripts styles=styles]
+[@admin.layout title="管理员列表"  menu="admin/user" scripts=scripts styles=styles]
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
