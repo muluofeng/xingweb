@@ -28,4 +28,6 @@ spring:
 image:
   upload-dir: /Users/xing/workspaces/php/image/upload
   domain-name: http://image.dev/
-
+solr:
+  host: http://localhost:8983/solr
+  solr-name: new_core

@@ -1,27 +1,9 @@
-[#assign prestyles]
+[#assign styles]
 <link rel="stylesheet" type="text/css" href="assets/adminLTE/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet"  href="assets/jquery-upload-file/uploadfile.css"/>
 [/#assign]
 [#assign dialog]
-<div class="" style="margin-top:10px;text-align: center">
-        <div class="box-body">
-            <form class="form-horizontal" id="imageForm" action="/admin/image/upload" enctype="multipart/form-data" method="POST">
-                <input class="text-center" type="hidden" name="w" id="w"/>
-                <input class="text-center" type="hidden" name="h" id="h"/>
-
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">图片</label>
-
-                    <div class="col-sm-4">
-                        <input type="file" name="file" id="image"/>
-                    </div>
-                </div>
-
-
-
-
-            </form>
-        </div>
-</div>
+<div id="fileuploader">Upload</div>
 [/#assign]
 [#assign  scripts]
 <!-- DataTables -->
@@ -29,9 +11,16 @@
 <script src="assets/adminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="assets/layer/layer.js"></script>
 <script src="assets/moment/moment.js"></script>
-<script src="assets/js/AjaxFileUpload.js"></script>
+<script src="assets/jquery-upload-file/jquery.uploadfile.min.js"></script>
+
 <script>
     $(function () {
+        $("#fileuploader").uploadFile({
+            url:"admin/image/upload",
+            fileName:"file",
+            showDone: true,                     //是否显示"Done"(完成)按钮
+            showDelete: true,                  //是否显示"Delete"(删除)按钮
+        });
         //加载datables
         $('#example2').DataTable({
             dom: 'lfrtip',
@@ -97,7 +86,7 @@
             layer.open({
                 type: 1 //此处以iframe举例
                 , title: '图片上传'
-                , area: ['390px', '330px']
+                , area: ['450px', '330px']
                 , closeBtn: 0
                 , shade: 0
                 , offset: [ //为了演示，随机坐标
@@ -128,39 +117,11 @@
 
         })
 
-        //删除管理员
-//        $('#example2').on('click', '.deleteById', function () {
-//            var id = $(this).data("id");
-//            layer.confirm("确认删除", {
-//                btn: ["确认", "取消"]
-//            }, function () {
-//                $.ajax({
-//                    url: "/admin/user/delete",
-//                    data: "id=" + id,
-//                    type: 'post',
-//                    dataType: "json",
-//                    success: function (re) {
-//                        if (re.success) {
-//                            layer.msg("删除成功");
-//                            location.reload();
-//
-//                        } else {
-//                            layer.msg("删除失败")
-//                        }
-//                    }
-//                });
-//            });
-//        });
-
 
     });
 </script>
 [/#assign]
-[#assign prescript]
-[#--<script src="assets/webUploader/js/webuploader.js"></script>
-<script src="assets/webUploader/js/upload.js"></script>--]
-[/#assign]
-[@admin.layout title="图片列表"  menu="admin/image" preScripts=prescript scripts=scripts preStyles=prestyles]
+[@admin.layout title="图片列表"  menu="admin/image"  scripts=scripts styles=styles]
 <div class="row">
     <div class="col-xs-12">
         <div class="box">

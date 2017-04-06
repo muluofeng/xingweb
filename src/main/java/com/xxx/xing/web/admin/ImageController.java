@@ -47,27 +47,31 @@ public class ImageController {
 
     @RequestMapping("/getList")
     @ResponseBody
-    public Map<String, Object> getList(int draw, int start, int length,@RequestParam(required = false,name = "search[value]") String searchWord){
-        Map  map=new HashMap<String,Object>();
-        if(start!=0){
-            start=start/length;
+    public Map<String, Object> getList(int draw, int start, int length, @RequestParam(required = false, name = "search[value]") String searchWord) {
+        Map map = new HashMap<String, Object>();
+        if (start != 0) {
+            start = start / length;
         }
-        Sort sort=new Sort(Sort.Direction.ASC,"id");
-        PageRequest request=new PageRequest(start,length,sort);
-        Page<Image> imagePage= imageService.serach(searchWord,request);
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        PageRequest request = new PageRequest(start, length, sort);
+        Page<Image> imagePage = imageService.serach(searchWord, request);
 
-        map.put("draw",draw);
+        map.put("draw", draw);
         map.put("recordsTotal", imagePage.getTotalPages()); //数据库里总共记录数
-        map.put("recordsFiltered",imagePage.getTotalElements());//返回的是过滤后的记录数
+        map.put("recordsFiltered", imagePage.getTotalElements());//返回的是过滤后的记录数
         map.put("data", imagePage.getContent());
-        map.put("title","图片列表");
+        map.put("title", "图片列表");
         return map;
     }
 
 
     @RequestMapping("/upload")
     @ResponseBody
-    public Result upload(@RequestParam("file") MultipartFile file, @RequestParam("w") int width, @RequestParam("h") int height, HttpServletRequest request, HttpServletResponse response) {
+    public Result upload(@RequestParam("file") MultipartFile file,
+                      /*   @RequestParam(value = "w",required = false) int width,
+                         @RequestParam(value = "h",required = false) int height, */
+                         HttpServletRequest request,
+                         HttpServletResponse response) {
         //判断文件类型
         String fileName = file.getOriginalFilename();
         String type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null;
@@ -78,7 +82,7 @@ public class ImageController {
         String datePath = DateFormatUtils.format(new Date(), "yyyy/MM/dd");
         String uploadPath = imageConfig.getUploadDir();
         String imageId = RandomStringUtils.randomAlphanumeric(15);
-        String trueFileName = imageId+fileName ;
+        String trueFileName = imageId + fileName;
         File fileDir = new File(uploadPath, "/" + datePath);
 
         if (!fileDir.exists()) {
@@ -90,7 +94,7 @@ public class ImageController {
                 out.write(file.getBytes());
                 out.flush();
                 //图片处理
-                ImageUtil.convertImage(file.getInputStream(),fileDir+"/"+imageId+file.getName()+"-s."+type);
+                ImageUtil.convertImage(file.getInputStream(), fileDir + "/" + imageId + file.getName() + "-s." + type);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -100,8 +104,8 @@ public class ImageController {
             //保存到数据库
             Image image = new Image();
             image.setUrl(imageConfig.getDomainName() + "/upload/" + datePath + "/" + trueFileName);
-            image.setWidth(width);
-            image.setHeight(height);
+            image.setWidth(1);
+            image.setHeight(1);
             image.setName(imageId);
             image.setLastModified(new Date());
             imageService.save(image);

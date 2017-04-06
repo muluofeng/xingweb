@@ -30,26 +30,26 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="[#if menu?index_of("admin/user")!=-1] active [/#if] treeview">
+            <li class="[#if menu?index_of("admin/user")!=-1]  [/#if] treeview">
                 <a href="#">
                     <i class="fa fa-users"></i> <span>管理员</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li  [#if menu=="admin/user"]class="active"[/#if]><a href="/admin/user"><i class="fa fa-user"></i>管理员列表</a></li>
+                <ul class="treeview-menu" [#if menu=="admin/user"]style="display: block"[/#if]>
+                    <li  [#if menu=="admin/user"]class="activeMine"[/#if]><a href="/admin/user"><i class="fa fa-user"></i>管理员列表</a></li>
                 </ul>
             </li>
-            <li class="[#if menu?index_of("admin/image")!=-1] active [/#if] treeview">
+            <li class="[#if menu?index_of("admin/image")!=-1]  [/#if] treeview">
                 <a href="#">
                     <i class="fa fa-file-image-o"></i>
                     <span>图片管理</span>
                     <span class="pull-right-container"></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu">
-                    <li [#if menu=="admin/image"]class="active"[/#if]><a href="/admin/image"><i class="fa fa-circle-o"></i> 图片列表</a></li>
+                <ul class="treeview-menu" [#if menu=="admin/image"]style="display: block"[/#if]>
+                    <li [#if menu=="admin/image"]class="activeMine"[/#if]><a href="/admin/image"><i class="fa fa-circle-o"></i> 图片列表</a></li>
                 </ul>
             </li>
 
