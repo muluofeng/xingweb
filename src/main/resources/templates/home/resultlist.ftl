@@ -6,8 +6,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="assets/img/logo/feji_16x16huishe.ico" type="image/x-icon"/>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>书签检索</title>
     <style>
         body {
             text-align: center;
@@ -101,21 +102,34 @@
             width: 100px;
             height: 50px;
             top: 25px;
-            right: 0;
+            right: 50px;
+
         }
 
         .login-qq {
-            display: inline-block;
             background-position: -112px 0;
             background-image: url(assets/img/login-third-party.png);
             background-repeat: no-repeat;
-            margin-right: 5px;
             width: 32px;
             height: 32px;
+            float: left;
+            margin-right: 18px;
+
+        }
+
+        .login-weibo {
+            background-image: url("assets/img/login-third-party.png");
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            width: 32px;
+            height: 32px;
+            float: left;
+            margin-right: 18px;
         }
 
         .content {
-            min-height: 513px;  //没有数据的情况下撑开
+            min-height: 513px;
+        / /
         }
 
         .data {
@@ -223,7 +237,7 @@
     <div>
         <div class="logocont" id="logocont">
             <a href="/" id="logo">
-                <img width="55" height="55" src="assets/img/logo/xing-logo44x44.png">
+                <img width="70" height="60" src="assets/img/logo/feiji_100x100_huishe.png">
             </a>
         </div>
         <div class="nav-input">
@@ -237,7 +251,9 @@
             </div>
         </div>
         <div class="login-div">
-            <div class="login-qq"></div>
+            [#--<div class="login-weibo"></div>--]
+            [#--<div class="login-qq"></div>--]
+
         </div>
     </div>
     <div class="nav-bottom">
@@ -257,7 +273,8 @@
             </h3>
             <div>
                 <div class="item-url">${bookmark.url}</div>
-                <span class="item-content">${bookmark.content?replace("<!--","&lt;!--")}</span>
+                [#assign content = bookmark.content ]
+                <span class="item-content">${content}</span>
             </div>
         </div>
     [/#list]
@@ -271,7 +288,7 @@
 
 
 <div class="footer">
-    粤ICP备16037375号-1
+    皖ICP备16006468号-1
 </div>
 </body>
 </html>

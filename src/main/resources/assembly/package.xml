@@ -17,8 +17,11 @@
             <outputDirectory>./</outputDirectory>
             <includes>
                 <include>application.yml</include>
+                <include>qqconnectconfig.properties</include>
+                <include>ehcache.xml</include>
             </includes>
         </fileSet>
+
     </fileSets>
     <dependencySets>
         <dependencySet>

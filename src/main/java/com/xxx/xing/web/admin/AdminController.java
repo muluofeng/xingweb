@@ -37,10 +37,10 @@ public class AdminController {
         model.addAttribute("adminObj", admin);
     }
 
-    @RequestMapping("")
-    public String index() {
-        return "admin/user/index";
-    }
+//    @RequestMapping("")
+//    public String index() {
+//        return "admin/user/index";
+//    }
 
 
     @RequestMapping("/userlist")

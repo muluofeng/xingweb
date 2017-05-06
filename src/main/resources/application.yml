@@ -31,3 +31,4 @@ image:
 solr:
   host: http://localhost:8983/solr
   solr-name: new_core
+
