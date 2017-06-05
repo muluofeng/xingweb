@@ -31,6 +31,7 @@ public class Test {
         DomPage domPage = new DomPage(doc);
         ContentExtractor contentExtractor = new ContentExtractor(domPage);
         String content = Jsoup.parse(contentExtractor.getContent()).text();
+        String aa;
         return new Bookmark("12", domPage.getDoc().title(), content, url);
     }
     @Value("${solr.host}")
