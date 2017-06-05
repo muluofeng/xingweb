@@ -91,6 +91,7 @@
 <script src="assets/adminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(function () {
+        alert(Request.UrlReferrer);
         $("#loginAction").on('click',function(){
             $.ajax({
                 url:$("#loginForm").attr("action"),

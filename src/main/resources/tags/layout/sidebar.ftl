@@ -38,7 +38,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu" [#if menu=="admin/user"]style="display: block"[/#if]>
-                    <li  [#if menu=="admin/user"]class="activeMine"[/#if]><a href="/admin/user"><i class="fa fa-user"></i>管理员列表</a></li>
+                    <li  [#if menu=="admin/user"]class="activeMine"[/#if]><a href="/admin/user"><i class="fa fa-user" ></i>管理员列表</a></li>
                 </ul>
             </li>
             <li class="[#if menu?index_of("admin/image")!=-1]  [/#if] treeview">
