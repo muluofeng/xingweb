@@ -1,7 +1,7 @@
 package com.xxx.xing.executor;
 
-import cn.edu.hfut.dmic.htmlbot.DomPage;
-import cn.edu.hfut.dmic.htmlbot.contentextractor.ContentExtractor;
+import cn.edu.hfut.dmic.contentextractor.ContentExtractor;
+import cn.edu.hfut.dmic.webcollector.net.HttpRequest;
 import com.xxx.xing.entity.Bookmark;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -86,13 +86,18 @@ public class BookmarkExecutor {
 
                     }
 
-                    Document doc = res.parse();
-                    DomPage domPage = new DomPage(doc);
-                    ContentExtractor contentExtractor = new ContentExtractor(domPage);
-                    String content = Jsoup.parse(contentExtractor.getContent()).text();
-                    log.info("title:" + domPage.getDoc().title() + "  url:" + url);
+                    HttpRequest request = new HttpRequest(url);
+                    String html = request.response().decode();
+                    Document doc = Jsoup.parse(html, url);
+                    String title=doc.title();
+                    String content=ContentExtractor.getContentByUrl(url);
+//                    Document doc = res.parse();
+//                    DomPage domPage = new DomPage(doc);
+//                    ContentExtractor contentExtractor = new ContentExtractor(domPage);
+//                    String content = Jsoup.parse(contentExtractor.getContent()).text();
+                    log.info("title:" + title + "  url:" + url);
 
-                    return new Bookmark(userid, domPage.getDoc().title(), content, url);
+                    return new Bookmark(userid,title, content, url);
                 } catch (Exception e) {
                     if (i == REQUEST_TIME - 1) {
                         count++;

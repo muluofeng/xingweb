@@ -1,7 +1,5 @@
 package com.xxx.xing.web.home;
 
-import cn.edu.hfut.dmic.htmlbot.DomPage;
-import cn.edu.hfut.dmic.htmlbot.contentextractor.ContentExtractor;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.xxx.xing.entity.Bookmark;
 import com.xxx.xing.service.BookmarkService;
@@ -11,7 +9,6 @@ import com.xxx.xing.solr.BookmarkSolr;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
